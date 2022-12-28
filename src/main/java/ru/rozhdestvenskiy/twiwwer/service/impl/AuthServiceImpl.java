@@ -1,18 +1,23 @@
-package ru.rozhdestvenskiy.twiwwer.service;
+package ru.rozhdestvenskiy.twiwwer.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseCookie;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.rozhdestvenskiy.twiwwer.domain.RegistrationReq;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.Response;
 import ru.rozhdestvenskiy.twiwwer.domain.responce.exception.CommonException;
 import ru.rozhdestvenskiy.twiwwer.dto.UserDto;
 import ru.rozhdestvenskiy.twiwwer.mapper.UserMapper;
 import ru.rozhdestvenskiy.twiwwer.model.User;
 import ru.rozhdestvenskiy.twiwwer.repository.UserRepository;
+import ru.rozhdestvenskiy.twiwwer.security.jwt.JwtUtils;
+import ru.rozhdestvenskiy.twiwwer.security.service.UserDetailsImpl;
+import ru.rozhdestvenskiy.twiwwer.service.AuthService;
 import ru.rozhdestvenskiy.twiwwer.util.ValidationUtils;
 
 import java.time.LocalDateTime;
@@ -24,37 +29,44 @@ import static ru.rozhdestvenskiy.twiwwer.domain.constant.Code.NICKNAME_BUSY;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TwiwwerServiceImpl implements TwiwwerService {
+public class AuthServiceImpl implements AuthService {
 
-    private final ValidationUtils validationUtils;
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final UserMapper userMapper;
-
+    private final AuthenticationManager authenticationManager;
 
     @Transactional
-    public ResponseEntity<Response> registration(RegistrationReq registrationReq) {
-
-        log.info("Validation registration request: {}", registrationReq);
-        validationUtils.validationRequest(registrationReq);
-
-        log.info("Map registration request: {}", registrationReq);
-        UserDto userDto = userMapper.registrationReqMapToUserDto(registrationReq);
+    public UserDto registration(UserDto registrationUserDto) {
 
         log.info("Check nickname: {} and email: {} for uniqueness",
-                userDto.getNickname(), userDto.getEmail());
-        checkNicknameAndEmail(userDto);
+                registrationUserDto.getNickname(), registrationUserDto.getEmail());
+        checkNicknameAndEmail(registrationUserDto);
 
-        log.info("Map userDto: {}", registrationReq);
-        User user = userMapper.userDtoMapToUser(userDto);
-        user.setPassword(encoder.encode(userDto.getPassword()));
+        log.info("Map userDto: {}", registrationUserDto);
+        User user = userMapper.userDtoMapToUser(registrationUserDto);
+        user.setPassword(encoder.encode(registrationUserDto.getPassword()));
         user.setTimeInsert(LocalDateTime.now());
 
         log.info("Save user: {}", user);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
 
-        // TODO: 25.12.2022 return
-        return null;
+        return userMapper.userMapToUserDto(savedUser);
+    }
+
+    @Transactional
+    public UserDto login(UserDto loginUserDto) {
+
+        log.info("Authentication  user: {}", loginUserDto);
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginUserDto.getNickname(), loginUserDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        return userMapper.userMapToUserDto(userDetails.getUser());
+
     }
 
     private void checkNicknameAndEmail(UserDto registrationUserDto) {

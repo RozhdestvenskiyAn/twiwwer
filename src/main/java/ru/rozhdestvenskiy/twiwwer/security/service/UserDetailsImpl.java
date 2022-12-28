@@ -5,6 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import ru.rozhdestvenskiy.twiwwer.model.User;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -16,7 +18,12 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.emptySet();
+    }
+
+
+    public long getId() {
+        return user.getId();
     }
 
     @Override
@@ -51,5 +58,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

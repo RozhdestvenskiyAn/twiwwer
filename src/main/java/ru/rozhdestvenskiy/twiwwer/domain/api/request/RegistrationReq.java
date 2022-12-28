@@ -1,4 +1,4 @@
-package ru.rozhdestvenskiy.twiwwer.domain;
+package ru.rozhdestvenskiy.twiwwer.domain.api.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -6,5 +6,5 @@ public enum Code {
     EMAIL_BUSY,
     INTERNAL_SERVER_ERROR,
     TEST,
-    USER_NOT_FOUND
+    BAD_CREDENTIALS
 }
