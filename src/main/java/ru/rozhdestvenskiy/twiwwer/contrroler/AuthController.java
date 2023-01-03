@@ -74,7 +74,7 @@ public class AuthController {
                                 .message("User: " + authenticatedUserDto.getNickname() + " authentication was successful")
                                 .build())
                         .build());
-        log.info("END endpoint registration, response: {}", response);
+        log.info("END endpoint login, response: {}", response);
         return response;
     }
 }
