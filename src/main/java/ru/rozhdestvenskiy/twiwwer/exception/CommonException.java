@@ -1,4 +1,4 @@
-package ru.rozhdestvenskiy.twiwwer.domain.responce.exception;
+package ru.rozhdestvenskiy.twiwwer.exception;
 
 import lombok.Builder;
 import lombok.Data;

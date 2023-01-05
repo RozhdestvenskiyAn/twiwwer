@@ -2,17 +2,12 @@ package ru.rozhdestvenskiy.twiwwer.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import ru.rozhdestvenskiy.twiwwer.domain.api.responce.AuthRes;
 import ru.rozhdestvenskiy.twiwwer.domain.constant.Code;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.Response;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.SuccessResponse;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.error.Error;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.error.ErrorResponse;
+import ru.rozhdestvenskiy.twiwwer.domain.constant.Error;
+import ru.rozhdestvenskiy.twiwwer.domain.responce.ErrorResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

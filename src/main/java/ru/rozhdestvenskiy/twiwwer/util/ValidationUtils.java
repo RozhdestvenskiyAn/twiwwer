@@ -3,7 +3,7 @@ package ru.rozhdestvenskiy.twiwwer.util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.exception.CommonException;
+import ru.rozhdestvenskiy.twiwwer.exception.CommonException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;

@@ -1,8 +1,8 @@
 package ru.rozhdestvenskiy.twiwwer.mapper;
 
 import org.mapstruct.Mapper;
-import ru.rozhdestvenskiy.twiwwer.domain.api.request.LoginReq;
-import ru.rozhdestvenskiy.twiwwer.domain.api.request.RegistrationReq;
+import ru.rozhdestvenskiy.twiwwer.domain.api.auth.LoginReq;
+import ru.rozhdestvenskiy.twiwwer.domain.api.auth.RegistrationReq;
 import ru.rozhdestvenskiy.twiwwer.dto.UserDto;
 import ru.rozhdestvenskiy.twiwwer.model.User;
 

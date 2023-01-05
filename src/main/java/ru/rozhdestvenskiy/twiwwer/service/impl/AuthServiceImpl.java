@@ -2,7 +2,6 @@ package ru.rozhdestvenskiy.twiwwer.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,15 +9,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.exception.CommonException;
+import ru.rozhdestvenskiy.twiwwer.exception.CommonException;
 import ru.rozhdestvenskiy.twiwwer.dto.UserDto;
 import ru.rozhdestvenskiy.twiwwer.mapper.UserMapper;
 import ru.rozhdestvenskiy.twiwwer.model.User;
 import ru.rozhdestvenskiy.twiwwer.repository.UserRepository;
-import ru.rozhdestvenskiy.twiwwer.security.jwt.JwtUtils;
 import ru.rozhdestvenskiy.twiwwer.security.service.UserDetailsImpl;
 import ru.rozhdestvenskiy.twiwwer.service.AuthService;
-import ru.rozhdestvenskiy.twiwwer.util.ValidationUtils;
 
 import java.time.LocalDateTime;
 

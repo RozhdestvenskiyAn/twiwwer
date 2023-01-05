@@ -28,10 +28,7 @@ public class Phrase {
     private LocalDateTime timeInsert;
 
     @Builder.Default
-    @ManyToMany(cascade = {
-
-            CascadeType.MERGE
-    })
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "phrase_tag",
             joinColumns = @JoinColumn(name = "phrase_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))

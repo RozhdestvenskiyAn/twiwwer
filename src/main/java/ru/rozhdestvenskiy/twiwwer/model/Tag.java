@@ -19,8 +19,6 @@ public class Tag {
     private Long id;
     private String tag;
 
-    @ManyToMany(mappedBy = "tags", cascade = {
-            CascadeType.MERGE
-    })
+    @ManyToMany(mappedBy = "tags", cascade = {CascadeType.MERGE})
     private Set<Phrase> phrases = new HashSet<>();
 }

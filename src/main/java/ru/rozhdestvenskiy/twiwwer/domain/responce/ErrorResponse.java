@@ -1,8 +1,8 @@
-package ru.rozhdestvenskiy.twiwwer.domain.responce.error;
+package ru.rozhdestvenskiy.twiwwer.domain.responce;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.Response;
+import ru.rozhdestvenskiy.twiwwer.domain.constant.Error;
 
 @Data
 @Builder

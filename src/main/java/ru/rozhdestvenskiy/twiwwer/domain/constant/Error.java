@@ -1,4 +1,4 @@
-package ru.rozhdestvenskiy.twiwwer.domain.responce.error;
+package ru.rozhdestvenskiy.twiwwer.domain.constant;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

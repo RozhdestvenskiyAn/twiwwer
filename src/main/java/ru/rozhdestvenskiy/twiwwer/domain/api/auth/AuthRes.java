@@ -1,4 +1,4 @@
-package ru.rozhdestvenskiy.twiwwer.domain.api.responce;
+package ru.rozhdestvenskiy.twiwwer.domain.api.auth;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

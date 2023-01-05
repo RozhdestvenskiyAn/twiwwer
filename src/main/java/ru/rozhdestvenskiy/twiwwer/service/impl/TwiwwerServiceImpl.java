@@ -18,6 +18,8 @@ import ru.rozhdestvenskiy.twiwwer.security.service.UserDetailsImpl;
 import ru.rozhdestvenskiy.twiwwer.service.TwiwwerService;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -32,7 +34,7 @@ public class TwiwwerServiceImpl implements TwiwwerService {
     public void createPhrase(PhraseDto phraseDto) {
 
         log.info("Mapping phraseDto: {}", phraseDto);
-        Phrase phrase = phraseMapper.PhraseDtoMapToPhrase(phraseDto);
+        Phrase phrase = phraseMapper.phraseDtoMapToPhrase(phraseDto);
 
         log.info("Setting time insert and owner of the phrase");
         phrase.setTimeInsert(LocalDateTime.now());
@@ -46,6 +48,18 @@ public class TwiwwerServiceImpl implements TwiwwerService {
 
         log.info("Saving phrase: {}", phrase);
         phraseRepository.save(phrase);
+    }
+
+    @Override
+    public List<PhraseDto> getAllMyPhrases() {
+
+        User currentUser = getCurrentUser();
+
+        log.info("Getting phrases by current user: {}", currentUser);
+        List<Phrase> phrases = phraseRepository.findAllByUserOrderByTimeInsertDesc(currentUser);
+
+        log.info("Mapping phrase list to dto: {}", phrases);
+        return phrases.stream().map(phraseMapper::phraseMapToPhraseDto).collect(Collectors.toList());
     }
 
     private User getCurrentUser() {

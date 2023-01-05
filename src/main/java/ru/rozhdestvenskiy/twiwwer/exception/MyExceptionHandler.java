@@ -1,16 +1,14 @@
-package ru.rozhdestvenskiy.twiwwer.domain.responce.exception;
+package ru.rozhdestvenskiy.twiwwer.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.rozhdestvenskiy.twiwwer.domain.constant.Code;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.error.Error;
-import ru.rozhdestvenskiy.twiwwer.domain.responce.error.ErrorResponse;
+import ru.rozhdestvenskiy.twiwwer.domain.constant.Error;
+import ru.rozhdestvenskiy.twiwwer.domain.responce.ErrorResponse;
 
 @Slf4j
 @ControllerAdvice
